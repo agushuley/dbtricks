@@ -1,0 +1,10 @@
+version: "2"
+
+services:
+  backup:
+    build:
+      context: ..
+      args:
+        - USER=${USER}
+        - UID=${UID}
+    #image:
