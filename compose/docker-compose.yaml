@@ -1,0 +1,18 @@
+version: "2"
+
+services:
+  backup:
+    build:
+      context: .
+      args:
+        - http_proxy=${http_proxy}
+        - https_proxy=${http_proxy}
+        - no_proxy=${no_proxy}
+        - USER_ID=${USER_ID}
+        - USER=${USER}
+ 
+    environment:
+      - USER_ID=${USER_ID}
+      - USER=${USER}
+    network_mode: "host"
+    #image:
