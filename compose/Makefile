@@ -2,8 +2,12 @@ SERVICE=dbbackups
 USER_ID=$(shell id -u)
 
 up:
-	docker-compose -p $(SERVICE) build
-	USER_ID=$(USER_ID) docker-compose -p $(SERVICE) create
+	USER_ID=$(USER_ID) USER=$(USER) docker-compose -p $(SERVICE) build
+	USER_ID=$(USER_ID) USER=$(USER) docker-compose -p $(SERVICE) create
 
 backup:
-	docker-compose -p $(SERVICE) start backup
+	USER_ID=$(USER_ID) USER=$(USER) docker-compose -p $(SERVICE) start backup
+
+shell:
+	USER_ID=$(USER_ID) USER=$(USER) docker-compose -p $(SERVICE) run --rm --entrypoint bash backup 
+

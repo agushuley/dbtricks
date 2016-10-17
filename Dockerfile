@@ -12,8 +12,4 @@ RUN \
     chmod -Rv guo+rx-w /backup/ && \
     true
 
-ENV \
-	USER= \
-	USER_ID=
-
 ENTRYPOINT ["/bin/bash", "/backup/dump_databases.sh"]

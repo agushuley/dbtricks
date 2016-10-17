@@ -3,9 +3,16 @@ version: "2"
 services:
   backup:
     build:
-      context: ..
+      context: .
+      args:
+        - http_proxy=${http_proxy}
+        - https_proxy=${http_proxy}
+        - no_proxy=${no_proxy}
+        - USER_ID=${USER_ID}
+        - USER=${USER}
+ 
     environment:
       - USER_ID=${USER_ID}
       - USER=${USER}
-    user: andriy
+    network_mode: "host"
     #image:
