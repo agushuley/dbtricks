@@ -4,7 +4,8 @@ services:
   backup:
     build:
       context: ..
-      args:
-        - USER=${USER}
-        - UID=${UID}
+    environment:
+      - USER_ID=${USER_ID}
+      - USER=${USER}
+    user: andriy
     #image:

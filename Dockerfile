@@ -10,10 +10,10 @@ ADD importer.py mysqldump_splitsort.py pg_dump_splitsort.py dump_databases.sh sc
 
 RUN \
     chmod -Rv guo+rx-w /backup/ && \
-    echo user=${USER} uid=${UID} && \
-    adduser ${USER} -u ${UID} -D -s bash && \
     true
 
-USER ${USER}
+ENV \
+	USER= \
+	USER_ID=
 
 ENTRYPOINT ["/bin/bash", "/backup/dump_databases.sh"]
