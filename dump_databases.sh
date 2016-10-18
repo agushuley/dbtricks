@@ -34,7 +34,7 @@ PG_NO_GLOBALS="${PG_NO_GLOBALS:-}"
 # mode=host, psql -H ${pg_backups_host}  will be used, user param -P will be added
 # if they are not empty, if password is not empty, PGPASSWORD variable will be set, or
 # password can be written into ~/.pgpass file
-MYSQL_BACKUPS=${MYSQL_BACKUPS:-}
+PG_CONNECTION=${PG_CONNECTION:-}
 PG_HOST=${PG_HOST:-}
 PG_USER=${PG_USER:-}
 PG_PASSWORD=${PG_PASSWORD:-}
