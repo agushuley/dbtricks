@@ -2,7 +2,7 @@ FROM alpine
 
 RUN \
     apk update && \
-    apk add git mercurial postgresql-client mysql-client bash ssh && \
+    apk add git mercurial postgresql-client mysql-client bash openssh-client && \
     rm -rvf /var/cache/apk/* && \
     true
 
