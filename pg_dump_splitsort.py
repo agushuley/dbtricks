@@ -129,9 +129,9 @@ class _DataHandler:
             sequence = 1
             dumper.append(self._start_line)
             output_size = 0
-            sorted_memory = [(key(line), line) for line in self._buf]
-            sorted_chunks = [[(key(line), line) for line in chunk]
-                             for chunk in self._chunks]
+            sorted_memory = ((key(line), line) for line in self._buf)
+            sorted_chunks = (((key(line), line) for line in chunk)
+                             for chunk in self._chunks)
             for _key, _line in heapq.merge(sorted_memory, *sorted_chunks):
                 dumper.append(_line)
                 output_size += len(_line)

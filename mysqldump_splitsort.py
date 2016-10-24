@@ -170,9 +170,9 @@ class _DataHandler:
         sequence = 1
         output_size = 0
         insert_size = 0
-        memory_chunk = [(key(line), line) for line in self._buf]
-        temp_chunks = [[(key(line), line) for line in chunk]
-                       for chunk in self._chunks]
+        memory_chunk = ((key(line), line) for line in self._buf)
+        temp_chunks = (((key(line), line) for line in chunk)
+                       for chunk in self._chunks)
         for _key, _line in heapq.merge(memory_chunk, *temp_chunks):
             if _end_chunk:
                 dumper.new_output('{counter}_{table_name}_{sequence}.sql'.format(
