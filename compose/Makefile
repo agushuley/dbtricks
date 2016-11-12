@@ -1,13 +1,18 @@
 SERVICE=dbbackups
 USER_ID=$(shell id -u)
+USER=$(shell id -un)
+export USER USER_ID
 
 up:
-	USER_ID=$(USER_ID) USER=$(USER) docker-compose -p $(SERVICE) build
-	USER_ID=$(USER_ID) USER=$(USER) docker-compose -p $(SERVICE) create
+	docker-compose -p $(SERVICE) build
+	docker-compose -p $(SERVICE) create
 
 backup:
-	USER_ID=$(USER_ID) USER=$(USER) docker-compose -p $(SERVICE) start backup
+	docker-compose -p $(SERVICE) run --rm backup
+
+pull:
+	docker pull andriyg/dbtricks
 
 shell:
-	USER_ID=$(USER_ID) USER=$(USER) docker-compose -p $(SERVICE) run --rm --entrypoint bash backup 
+	docker-compose -p $(SERVICE) run --rm --entrypoint bash backup
 
