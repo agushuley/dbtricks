@@ -39,10 +39,17 @@ PG_HOST=${PG_HOST:-}
 PG_USER=${PG_USER:-}
 PG_PASSWORD=${PG_PASSWORD:-}
 
-MYSQL_BACKUPS=${MYSQL_BACKUPS:-N}
+MYSQL_BACKUPS=${MYSQL_BACKUPS:-}
 MYSQL_BACKUPS_DIR="${MYSQL_BACKUPS_DIR:-$HOME/var/backups/mysql}"
 # if databases are empty, all databases will be backed up
 MYSQL_DATABASES=${MYSQL_DATABASES:-}
+MYSQL_DATABASE=${MYSQL_DATABASE:-}
+# if MYSQL_DATABASE is set and not MYSQL_BACKUPS defined, we dumping docker based mysql database
+if [[ -z "${MYSQL_DATABASES}" && -z "${MYSQL_BACKUPS}" && ! -z "${MYSQL_DATABASE}" ]] ; then
+    MYSQL_HOST="${MYSQL_HOST:-mysql}"
+    MYSQL_DATABASES="${MYSQL_DATABASE}"
+    MYSQL_BACKUPS=Y
+fi
 # plain mysqldump call will be used with host, user, pass added, if variables will be difined
 MYSQL_HOST=${MYSQL_HOST:-}
 MYSQL_USER=${MYSQL_USER:-}
@@ -182,7 +189,7 @@ case "${MYSQL_BACKUPS}" in
                 _scm=
                 sql_dump_file=${MYSQL_BACKUPS_DIR}/${database}.sql
                 mkdir -p "${MYSQL_BACKUPS_DIR}/${database}" \
-                    && eval ${mysql_env} mysqldump ${mysql_suffix} --result-file=${sql_dump_file} ${database} -c --skip-opt --skip-dump-date \
+                    && eval ${mysql_env} mysqldump ${mysql_suffix} --result-file="${sql_dump_file}" "${database}" -c --skip-opt --skip-dump-date --create-options \
                     && dir_check_scm "${MYSQL_BACKUPS_DIR}/${database}" _scm "Y" \
                     && "${mysql_split}" ${sql_dump_file} -d ${MYSQL_BACKUPS_DIR}/${database}/ -c \
                     && dir_push_scm "${MYSQL_BACKUPS_DIR}/${database}" "${_scm}"
