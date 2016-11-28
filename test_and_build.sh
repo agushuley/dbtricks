@@ -4,7 +4,6 @@ set | grep GO
 
 go get -v -u -t github.com/andriyg76/dbtricks/ \
     && go test -v github.com/andriyg76/dbtricks/ \
-    && go test -v github.com/andriyg76/dbtricks/params \
     && go test -v github.com/andriyg76/dbtricks/orders \
     && go test -v github.com/andriyg76/dbtricks/writer \
     && go test -v github.com/andriyg76/dbtricks/mergesort \
