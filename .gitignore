@@ -2,10 +2,11 @@
 *.pyc
 /README.html
 .idea/
-/src/github.com/**
+**.iml
 libs
 pkg
 bin
+/src/
 /tests/
 .DS_Store
 
