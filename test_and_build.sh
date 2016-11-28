@@ -1,25 +1,13 @@
 #!/usr/bin/env bash
 
-if [[ $( uname -o ) == 'Cygwin' ]] ;then
-	GOPATH=$( cygpath -w $( pwd ) )
-	GOBIN=$GOPATH\\bin
-else
-	GOPATH=$( pwd )
-	GOBIN=$GOPATH/bin
-fi
-
-export GOPATH GOBIN
 set | grep GO
 
-rm -Rvf bin pkg
-
-go get -v github.com/stretchr/testify/assert \
-    && go test -v dbtricks \
-    && go test -v dbtricks/params \
-    && go test -v dbtricks/orders \
-    && go test -v dbtricks/writer \
-    && go test -v mergesort \
-    && go test -v pg/dumpsplit \
-    && go test -v pg/datasplit \
-    && go test -v pgdumpsplit \
-    && go install -v pgdumpsplit #\
+go get -v -u -t github.com/andriyg76/dbtricks/ \
+    && go test -v github.com/andriyg76/dbtricks/ \
+    && go test -v github.com/andriyg76/dbtricks/params \
+    && go test -v github.com/andriyg76/dbtricks/orders \
+    && go test -v github.com/andriyg76/dbtricks/writer \
+    && go test -v github.com/andriyg76/dbtricks/mergesort \
+    && go test -v github.com/andriyg76/dbtricks/pg/dumpsplit \
+    && go test -v github.com/andriyg76/dbtricks/pg/datasplit \
+    && go install -v github.com/andriyg76/dbtricks #\
