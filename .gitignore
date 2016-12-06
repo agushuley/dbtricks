@@ -6,7 +6,7 @@
 libs
 pkg
 bin
-/src/
+/src/*
 /tests/
 .DS_Store
 

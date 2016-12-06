@@ -2,7 +2,7 @@
 
 set | grep GO
 
-go get -v -t github.com/andriyg76/dbtricks/ \
+go get -u -v -t github.com/andriyg76/dbtricks/ \
     && go test -v github.com/andriyg76/dbtricks/ \
     && go test -v github.com/andriyg76/dbtricks/orders \
     && go test -v github.com/andriyg76/dbtricks/writer \
