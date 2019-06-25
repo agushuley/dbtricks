@@ -72,7 +72,8 @@ case "${PG_BACKUPS}" in
                     exit 1
                 fi
                 if [[ ! -z "${PG_PASSWORD}" ]] ; then
-                    pg_prefix="PGPASSWORD=\"${PG_PASSWORD}\""
+                    pg_prefix=""
+                    export PGPASSWORD="${PG_PASSWORD}"
                 else
                     pg_prefix=""
                 fi
