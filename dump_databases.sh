@@ -18,8 +18,15 @@ function panic() {
 
 function dir_check_scm() { echo "Have to be defined $FUNCNAME $1 $2 $3"; exit 1; }
 function dir_push_scm() { echo "Have to be defined $FUNCNAME $1 $2"; exit 1; }
-source ${BASE_NAME}/scm.sh \
-    || panic "$0 Can't load scm library "
+case "${DO_NOT_CHECK_SCM}" in
+    [Yy][Ee][Ss]|[Tt][Rr][Uu][Ee]|[1TtYy])
+        function dir_check_scm() { true; }
+        function dir_push_scm() { true; }
+        ;;
+    *)
+        source ${BASE_NAME}/scm.sh \
+            || panic "$0 Can't load scm library "
+esac
 
 cd /tmp
 
